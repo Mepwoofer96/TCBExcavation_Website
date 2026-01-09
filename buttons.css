@@ -1,0 +1,46 @@
+/* Top button defines */
+.animated-buttontop {
+  background-color: #FBAD04; 
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.animated-buttontop:hover {
+  background-color: #FFCE5C; 
+  transform: translateY(-3px); 
+}
+
+.animated-buttontop:active {
+  transform: translateY(0); 
+}
+
+/* Middle buttons */
+.btn-gold {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #d4a200;
+  color: white;
+  text-decoration: none;
+}
+
+/* Bottom buttons */
+.btn-dark {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #5a4500;
+  color: white;
+  text-decoration: none;
+}
+
+/* Button outlines*/
+.btn-outline {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: 2px solid white;
+  color: white;
+  text-decoration: none;
+}

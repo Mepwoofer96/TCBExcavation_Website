@@ -8,6 +8,8 @@ body {
   color: #333;
 }
 
+
+
 /* NAV */
 .nav {
   position: absolute;
@@ -51,14 +53,6 @@ body {
   max-width: 800px;
 }
 
-.btn-outline {
-  margin-top: 20px;
-  padding: 12px 28px;
-  border: 2px solid white;
-  color: white;
-  text-decoration: none;
-}
-
 /* WELCOME */
 .welcome {
   padding: 60px 20px;
@@ -96,14 +90,6 @@ body {
   object-fit: cover;
 }
 
-.btn-gold {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: #d4a200;
-  color: white;
-  text-decoration: none;
-}
 
 /* FAQ */
 .faq {
@@ -196,14 +182,6 @@ details p {
 .about-section p {
   max-width: 700px;
   margin: 0 auto 30px;
-}
-
-.btn-dark {
-  display: inline-block;
-  padding: 12px 28px;
-  background: #5a4500;
-  color: white;
-  text-decoration: none;
 }
 
 /* RESPONSIVE */
