@@ -21,6 +21,7 @@ body {
   align-items: center;
   color: white;
   z-index: 10;
+  background: #f0e3b1;
 }
 
 .nav a {
@@ -190,4 +191,11 @@ details p {
     grid-template-columns: 1fr;
   }
 }
+
+.logoimg {
+  border-radius: 6px;
+  max-width: 12%;
+
+}
+
 
