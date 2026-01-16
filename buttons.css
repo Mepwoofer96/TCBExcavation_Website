@@ -27,6 +27,16 @@
   text-decoration: none;
 }
 
+.btn-gold:hover{
+  background-color: #d4a200;
+  transform: translateY(-3px);
+}
+
+.btn-gold:active{
+  transform: translateY(-1px);
+  background-color: #5a4500;
+}
+
 /* Bottom buttons */
 .btn-dark {
   display: inline-block;

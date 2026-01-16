@@ -9,19 +9,36 @@ body {
 }
 
 
+@media (max-width: 768px){
+  .nav{
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+  }
+
+  .nav nav{
+    justify-content: center;
+  }
+}
 
 /* NAV */
 .nav {
-  position: absolute;
+  position: sticky;
   top: 0;
   width: 100%;
-  padding: 20px 40px;
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
   z-index: 10;
   background: #dbdadade;
+}
+
+.nav nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .nav a {
@@ -32,10 +49,10 @@ body {
 
 /* HERO */
 .hero {
-  height: 90vh;
+  height: min(90vh,700px);
   background-size: cover;
-  background-position: center;
   position: relative;
+  */
 }
 
 .hero-overlay {
@@ -50,8 +67,8 @@ body {
 }
 
 .hero h1 {
-  font-size: 3rem;
-  max-width: 800px;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  padding: 0 15px;
 }
 
 /* WELCOME */
@@ -81,14 +98,15 @@ body {
 }
 
 .service-card {
-  background: white;
-  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.service-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+@media (min-width: 600px) {
+  .service-card img {
+    min-height: 160px;
+    max-height: 300px;
+  }
 }
 
 
@@ -152,11 +170,10 @@ details p {
 
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
+  padding: 14px;
+  font-size: 16px; /* prevents iOS zoom */
 }
+
 
 /* MAP */
 .contact-map iframe {
@@ -193,9 +210,29 @@ details p {
 }
 
 .logoimg {
-  border-radius: 6px;
-  max-width: 7%;
+  max-width: 120px;
+  width: 100%;
 
 }
 
+body {
+  line-height: 1.6;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+p {
+  font-size: 1rem;
+}
 
