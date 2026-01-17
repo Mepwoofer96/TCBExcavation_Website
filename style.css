@@ -49,14 +49,17 @@ body {
 
 /* HERO */
 .hero {
-  height: min(90vh,700px);
+  min-height: 75vh;           
+  max-height: 700px;
   background-size: cover;
+  background-position: center;
   position: relative;
 }
 
 .hero-overlay {
-  background: rgba(0,0,0,0.4);
-  height: 100%;
+background: rgba(0, 0, 0, 0.45);
+  min-height: 100%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,9 +69,17 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  padding: 0 15px;
+  font-size: clamp(1.6rem, 6vw, 3rem);
+  line-height: 1.2;
+  max-width: 900px;
 }
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 65vh;
+  }
+}
+
 
 /* WELCOME */
 .welcome {
@@ -84,30 +95,42 @@ body {
 
 /* SERVICES */
 .services {
-  padding: 60px 20px;
+  padding: 40px 15px;
   background: #f7f7f7;
   text-align: center;
 }
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 30px;
 }
 
 .service-card {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
+  background: #fff;
 }
 
+/* Image behavior */
+.service-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9; 
+  object-fit: cover;
+  display: block;
+}
+
+/* Tablet+ */
 @media (min-width: 600px) {
+  .service-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
   .service-card img {
-    min-height: 160px;
-    max-height: 300px;
+    aspect-ratio: 4 / 3;
   }
 }
-
 
 /* FAQ */
 .faq {
@@ -287,4 +310,12 @@ p {
     width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .service-card img {
+    aspect-ratio: 3 / 2;
+  }
+}
+
 */
+
