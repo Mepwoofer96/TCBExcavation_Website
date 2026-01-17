@@ -4,6 +4,7 @@
   color: white;
   padding: 15px 30px;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -22,6 +23,7 @@
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
+  border-radius: 10px;
   background: #d4a200;
   color: white;
   text-decoration: none;
@@ -40,6 +42,7 @@
 /* Bottom buttons */
 .btn-dark {
   display: inline-block;
+  border-radius: 10px;
   padding: 12px 28px;
   background: #5a4500;
   color: white;
