@@ -2,13 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact | TCB Excavation</title>
+  <title class="logo" >TCB Excavation</title>
+  <link rel="icon" type="png" href="images/claw.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="indexstyle.css">
+  <link rel="stylesheet" href="buttons.css">
 </head>
 <body>
-  <h1>Contact TCB Excavation</h1>
-  <p>Coming soon</p>
-  <a href="index.html">← Back to Home</a>
+
+  <!-- NAV -->
+  <header class="nav">
+    <img class="logoimg" src="images/tcbexcavationlogo_noback.png" alt="">
+    <div class="logo"></div>
+    
+    <nav>
+      <a class="animated-buttontop" href="index.html">Home</a>
+      <a class="animated-buttontop" href="services.html">Our Excavation Services</a>
+      <a class="animated-buttontop" href="contact.html">Contact</a>
+    </nav>
+
+
+
+  </header>
+
+   <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-wrapper">
+
+      <div class="contact-form">
+        <h2>Contact us</h2>
+        <p>
+          For inquiries or to request a quote, please fill out the form below
+          or contact us directly at (970) 333-0372. Please leave a message if
+          there is no answer we will get to your request quickly.
+        </p>
+
+        <form action="form-process.php" method="post" class="formcarry-form">
+          <label>Name *</label>
+          <input type="text" required>
+
+          <label>Email address *</label>
+          <input type="email" required>
+
+          <label>Message *</label>
+          <textarea rows="5" required></textarea>
+
+          <button type="submit" class="btn-gold">Submit form</button>
+        </form>
+      </div>
+
+      <div class="contact-map">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-106.12071990966797%2C39.06798017367507%2C-105.87696075439455%2C39.30959722211244&amp;layer=mapnik"
+          loading="lazy"
+          style="border: 1px solid black">
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <h2>About us</h2>
+    <p>
+      TCB Excavation is a leading excavation company in Fairplay, Colorado,
+      offering a range of services to meet your excavation needs. With a strong
+      focus on quality and customer satisfaction, we are your go-to choice for
+      all excavation projects.
+    </p>
+    <a href="#" class="btn-dark">Dig In</a>
+  </section>
+
 </body>
 </html>
-

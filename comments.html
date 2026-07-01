@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment Section</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #f7f7f8;
+    --border: #e4e4e7;
+    --text: #18181b;
+    --muted: #71717a;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --danger: #dc2626;
+    --radius: 10px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 40px 20px;
+  }
+
+  .comments-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .comments-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .comments-header h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .comments-header .count {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* --- New comment form --- */
+  .comment-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .comment-form-body {
+    flex: 1;
+  }
+
+  .comment-form textarea {
+    width: 100%;
+    min-height: 70px;
+    resize: vertical;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--panel);
+    transition: border-color .15s, background .15s;
+  }
+
+  .comment-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .comment-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .btn-primary:disabled {
+    background: #a3b8e8;
+    cursor: not-allowed;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+
+  /* --- Comment list --- */
+  .comment {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .comment-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .comment-bubble {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+  }
+
+  .comment-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .comment-author {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .comment-time {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .comment-text {
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  .comment-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+    padding-left: 4px;
+  }
+
+  .comment-actions button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0;
+  }
+
+  .comment-actions button:hover {
+    color: var(--accent);
+  }
+
+  .comment-actions .delete-btn:hover {
+    color: var(--danger);
+  }
+
+  /* --- Reply form (hidden by default) --- */
+  .reply-form {
+    display: none;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .reply-form.open {
+    display: flex;
+  }
+
+  .reply-form textarea {
+    width: 100%;
+    min-height: 50px;
+    resize: vertical;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    background: #fff;
+  }
+
+  .reply-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .reply-form-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+
+  .btn-ghost {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .btn-ghost:hover {
+    background: var(--panel);
+  }
+
+  .btn-small {
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  /* --- Replies --- */
+  .replies {
+    margin-top: 14px;
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 30px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="comments-wrap">
+  <div class="comments-header">
+    <h2>Comments</h2>
+    <span class="count" id="commentCount">0</span>
+  </div>
+
+  <!-- New top-level comment -->
+  <form class="comment-form" id="commentForm">
+    <div class="avatar">Y</div>
+    <div class="comment-form-body">
+      <textarea id="commentInput" placeholder="Add a comment..." maxlength="1000"></textarea>
+      <div class="comment-form-actions">
+        <button type="submit" class="btn-primary" id="submitBtn" disabled>Comment</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="commentList"></div>
+  <div class="empty-state" id="emptyState">No comments yet. Be the first to say something.</div>
+</div>
+
+<script>
+  // ---- In-memory data store (resets on page reload) ----
+  let comments = [
+    {
+      id: 1,
+      author: "Maya Chen",
+      text: "This is such a clean write-up, thanks for putting it together!",
+      time: Date.now() - 1000 * 60 * 60 * 3,
+      replies: [
+        {
+          id: 2,
+          author: "You",
+          text: "Glad it was helpful!",
+          time: Date.now() - 1000 * 60 * 60 * 2
+        }
+      ]
+    }
+  ];
+  let nextId = 3;
+
+  const listEl = document.getElementById("commentList");
+  const countEl = document.getElementById("commentCount");
+  const emptyEl = document.getElementById("emptyState");
+  const form = document.getElementById("commentForm");
+  const input = document.getElementById("commentInput");
+  const submitBtn = document.getElementById("submitBtn");
+
+  function timeAgo(ts) {
+    const diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 60) return "just now";
+    if (diff < 3600) return Math.floor(diff / 60) + "m ago";
+    if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
+    return Math.floor(diff / 86400) + "d ago";
+  }
+
+  function initials(name) {
+    return name.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function totalCount() {
+    return comments.reduce((sum, c) => sum + 1 + c.replies.length, 0);
+  }
+
+  function render() {
+    listEl.innerHTML = "";
+    countEl.textContent = totalCount();
+    emptyEl.style.display = comments.length ? "none" : "block";
+
+    comments.forEach(comment => {
+      listEl.appendChild(renderComment(comment));
+    });
+  }
+
+  function renderComment(comment, isReply = false) {
+    const wrap = document.createElement("div");
+    wrap.className = "comment";
+
+    wrap.innerHTML = `
+      <div class="avatar">${initials(comment.author)}</div>
+      <div class="comment-body">
+        <div class="comment-bubble">
+          <div class="comment-meta">
+            <span class="comment-author">${escapeHtml(comment.author)}</span>
+            <span class="comment-time">${timeAgo(comment.time)}</span>
+          </div>
+          <p class="comment-text">${escapeHtml(comment.text)}</p>
+        </div>
+        <div class="comment-actions">
+          ${!isReply ? `<button class="reply-toggle">Reply</button>` : ""}
+          <button class="delete-btn">Delete</button>
+        </div>
+        ${!isReply ? `
+          <form class="reply-form">
+            <textarea placeholder="Write a reply..." maxlength="500"></textarea>
+            <div class="reply-form-actions">
+              <button type="button" class="btn-ghost btn-small cancel-reply">Cancel</button>
+              <button type="submit" class="btn-primary btn-small">Reply</button>
+            </div>
+          </form>
+          <div class="replies"></div>
+        ` : ""}
+      </div>
+    `;
+
+    // Delete
+    wrap.querySelector(".delete-btn").addEventListener("click", () => {
+      if (isReply) {
+        comment.parent.replies = comment.parent.replies.filter(r => r.id !== comment.id);
+      } else {
+        comments = comments.filter(c => c.id !== comment.id);
+      }
+      render();
+    });
+
+    if (!isReply) {
+      const replyToggle = wrap.querySelector(".reply-toggle");
+      const replyForm = wrap.querySelector(".reply-form");
+      const repliesEl = wrap.querySelector(".replies");
+
+      replyToggle.addEventListener("click", () => {
+        replyForm.classList.toggle("open");
+        if (replyForm.classList.contains("open")) {
+          replyForm.querySelector("textarea").focus();
+        }
+      });
+
+      wrap.querySelector(".cancel-reply").addEventListener("click", () => {
+        replyForm.classList.remove("open");
+        replyForm.querySelector("textarea").value = "";
+      });
+
+      replyForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const textarea = replyForm.querySelector("textarea");
+        const text = textarea.value.trim();
+        if (!text) return;
+        comment.replies.push({
+          id: nextId++,
+          author: "You",
+          text,
+          time: Date.now()
+        });
+        render();
+      });
+
+      comment.replies.forEach(reply => {
+        reply.parent = comment;
+        repliesEl.appendChild(renderComment(reply, true));
+      });
+    }
+
+    return wrap;
+  }
+
+  // Enable/disable submit based on input
+  input.addEventListener("input", () => {
+    submitBtn.disabled = input.value.trim().length === 0;
+  });
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    comments.push({
+      id: nextId++,
+      author: "You",
+      text,
+      time: Date.now(),
+      replies: []
+    });
+    input.value = "";
+    submitBtn.disabled = true;
+    render();
+  });
+
+  render();
+</script>
+
+</body>
+</html>

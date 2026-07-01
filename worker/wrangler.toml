@@ -1,0 +1,11 @@
+
+name = "tcb-comments-api"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "COMMENTS_KV"
+id = "3656f710d23548d4b1fe3c20055d7433"
+
+
+
