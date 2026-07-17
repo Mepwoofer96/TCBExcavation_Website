@@ -6,7 +6,7 @@ const KV_KEY = "comments";
 
 // Change this to your real site origin once deployed, e.g. "https://tcbexcavation.com"
 // You can leave "*" while testing, but lock it down before going live.
-const ALLOWED_ORIGIN = "*";
+const ALLOWED_ORIGIN = "https://tcb-excavation.com";
 
 function corsHeaders() {
   return {

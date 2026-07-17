@@ -1,7 +1,7 @@
 // Update this to your deployed Worker URL, e.g.
 // "https://tcb-comments-api.yourname.workers.dev/comments"
 // or, once you set up a custom route: "https://comments.tcbexcavation.com/comments"
-const API_URL = "https://tcb-comments-api.tcbexcavationllc.workers.dev";
+const API_URL = "https://tcb-comments-api.tcbexcavationllc.workers.dev/comments";
 
 const form = document.getElementById("commentForm");
 const nameInput = document.getElementById("commentName");
